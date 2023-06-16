@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Registration Form</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="registration.css">
+    <script>
+        function validateForm(e) {
+            e.preventDefault();
+            
+            var name = document.forms["registrationForm"]["name"].value;
+            var email = document.forms["registrationForm"]["email"].value;
+            var password = document.forms["registrationForm"]["password"].value;
+            var confirmPassword = document.forms["registrationForm"]["confirmPassword"].value;
+            var role = document.querySelector('#role');
+
+            // Clear previous error messages
+            var errorMessages = document.getElementsByClassName("error-message");
+            for (var i = 0; i < errorMessages.length; i++) {
+                errorMessages[i].style.display = "none";
+            }
+
+            var errors = [];
+            
+            // Validate name
+            if (name === "") {
+                errors.push("Please enter your name.");
+
+            }
+            
+            // Validate email
+            if (email === "") {
+
+                errors.push("Please enter your email.");
+            }
+
+            // if (!role) {
+
+            //     errors.push("Please select a role.");
+            // }
+            
+            // Validate password
+            if (password === "") {
+
+                errors.push("Please enter a password.");
+            }
+            
+            // Validate confirm password
+            if (confirmPassword === "") {
+
+                errors.push("Please confirm your password.");
+            }
+            
+            
+            if (password !== confirmPassword) {
+
+                errors.push("Passwords do not match.");
+            }
+
+            
+
+            // Display error messages
+            if (errors.length > 0) {
+                var errorContainer = document.getElementById("error-container");
+                    var errorMessage = document.createElement("p");
+                    errorMessage.className = "error-message";
+                    errorMessage.textContent = errors[0];
+                    errorContainer.appendChild(errorMessage);
+
+                // Remove error messages after 3 seconds
+                setTimeout(function() {
+                    while (errorContainer.firstChild) {
+                        errorContainer.removeChild(errorContainer.firstChild);
+                    }
+                }, 3000);
+
+                return false;
+            }
+
+            console.log(name);
+            console.log(email);
+            console.log(role.value);
+            console.log(password);
+            console.log(confirmPassword);
+
+            // Call API endpoint with form data
+            var formData = {
+                name: name,
+                email: email,
+                role: role.value,
+                password: password,
+                confirmPassword: confirmPassword
+            };
+
+            if(errors.length===0){
+                // Replace 'YOUR_API_ENDPOINT' with your actual API endpoint URL
+            // var apiUrl = '/register';
+
+            // fetch(apiUrl, {
+            //     method: 'POST',
+            //     headers: {
+            //         'Content-Type': 'application/json'
+            //     },
+            //     body: JSON.stringify(formData)
+            // })
+            // .then(response => response.json())
+            // .then(data => {
+            //     // Handle API response
+            //     console.log(data);
+            //     // Display success message or perform other actions
+            // })
+            // .catch(error => {
+            //     // Handle API error
+            //     console.error(error);
+            //     // Display error message or perform other actions
+            // });
+            var errorContainer = document.getElementById("error-container");
+                    var errorMessage = document.createElement("p");
+                    errorMessage.className = "error-message";
+                    errorMessage.textContent = "Registered Successfully";
+                    errorContainer.appendChild(errorMessage);
+
+                
+
+            document.forms["registrationForm"].submit()
+            }
+        }
+    </script>
+</head>
+<body background="bgimg2.jpg" style="background-size: cover;">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light my-element">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/">CMS</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/">Home</a>
+                </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/login">Login</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/register">Register</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+
+
+    <div class="container">
+        <h2>Register Here</h2>
+    <form name="registrationForm" action="/register" method="post" onsubmit="return validateForm(event)">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name"><br><br>
+        
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email"><br><br>
+
+        <!-- <label>Role:</label> -->
+        <!-- <div class="radio-group">
+            <input type="radio" id="roleCreator" name="role" value="creator">
+            <label for="roleCreator">Creator</label>
+        </div> -->
+        
+        <!-- <div class="radio-group " style="display: none;"> -->
+            <input type="hidden" id="role" name="role" value="user">
+            <!-- <label for="roleUser">User</label> -->
+        <!-- </div> -->
+        
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password"><br><br>
+        
+        <label for="confirmPassword">Confirm Password:</label>
+        <input type="password" id="confirmPassword" name="confirmPassword"><br><br>
+        
+        <input type="submit" value="Submit">
+    </form>
+    <div id="error-container"></div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+</body>
+</html>

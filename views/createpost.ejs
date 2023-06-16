@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Create Post</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="registration.css">
+    <script>
+        function validateForm(event) {
+            event.preventDefault(); // Prevent the form from submitting initially
+
+            var title = document.getElementById('title').value;
+            var fileInput = document.getElementById('image');
+            var description = document.getElementById('description').value;
+            var errorContainer = document.getElementById('error-container');
+            errorContainer.innerHTML = ''; // Clear any previous error messages
+
+            if (title.trim() === '') {
+                displayErrorMessage('Please enter a title');
+                return false; // Prevent form submission if validation fails
+            }
+
+            if (fileInput.files.length === 0) {
+                displayErrorMessage('Please select an image file');
+                return false; // Prevent form submission if validation fails
+            }
+
+            if (description.trim() === '') {
+                displayErrorMessage('Please enter a description');
+                return false; // Prevent form submission if validation fails
+            }
+
+            // If validation passes, you can submit the form
+            document.loginForm.submit();
+        }
+
+        function displayErrorMessage(message) {
+            var errorContainer = document.getElementById('error-container');
+            var errorMessage = document.createElement('p');
+            errorMessage.classList.add('error-message');
+            errorMessage.textContent = message;
+            errorContainer.appendChild(errorMessage);
+            setTimeout(function() {
+                    while (errorContainer.firstChild) {
+                        errorContainer.removeChild(errorContainer.firstChild);
+                    }
+                }, 3000);
+        }
+    </script>
+    
+</head>
+<body background="bgimg2.jpg" style="background-size: cover;">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light my-element">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/">CMS</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/">Home</a>
+            </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/admin">Admin</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/logout">Logout</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+      <div class="container " >
+        <h1 style="font-weight:600; ">Create Post</h1>
+
+        <form name="loginForm" action="/createPost" method="post" enctype="multipart/form-data" onsubmit="validateForm(event)">
+            <label for="title">Title:</label>
+            <input type="text" id="title" name="title"><br>
+            <input type="file" id="image" name="image" accept="image/*" style="margin-top: 6px; margin-bottom: 6px;">
+
+            
+            <label for="description">Description:</label>
+            <!-- <input type="password" id="password" name="password"><br> -->
+            <textarea id="description" name="description" placeholder="Enter your text here"></textarea>
+            
+            <input type="submit" value="Create">
+        </form>
+        <div id="error-container"></div>
+        <p><%= locals.message %></p>
+
+
+    </div>
+
+
+
+    
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+</body>
+</html>

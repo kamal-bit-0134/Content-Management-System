@@ -1,0 +1,117 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+    
+}
+
+h2 {
+    color: #333;
+    text-align: center;
+    margin: 5px;
+}
+
+form {
+    width: 400px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}
+
+input[type="submit"],input[type="button"] {
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover,
+input[type="button"]:hover {
+    background-color: #45a049;
+}
+
+.error {
+    color: red;
+    font-weight: bold;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 40px;
+    /* height: 100vh; */
+}
+
+
+.radio-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+input[type="radio"] {
+    margin-right: 5px;
+}
+
+.error-message {
+    color: red;
+}
+
+.success{
+    font-size: x-large;
+    color: forestgreen;
+}
+
+.my-element{
+    opacity: 0.7;
+    font-weight: bold;
+}
+
+
+/* Optional hover effect */
+input[type="image"]:hover {
+    opacity: 0.8;
+}
+
+textarea {
+    /* width: 300px; */
+    width: 100%;
+    height: 150px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+}
+
